@@ -1,0 +1,263 @@
+@import "../../../theme/mixins/scrollbars";
+
+// Custom variables
+// Note:  These ones were added by us and have nothing to do with Ionic CSS Custom Properties
+:host {
+  --page-margin: var(--app-narrow-margin);
+
+  --page-categories-gutter: calc(var(--page-margin) / 4);
+
+  --page-category-background: var(--ion-color-medium);
+  --page-category-background-rgb: var(--ion-color-medium-rgb);
+}
+
+// Note:  All the CSS variables defined below are overrides of Ionic elements CSS Custom Properties
+.categories-list {
+  --ion-grid-column-padding: var(--page-categories-gutter);
+
+  padding: calc(var(--page-categories-gutter) * 3);
+  height: 100%;
+  align-content: flex-start;
+  overflow: scroll;
+
+  @include hide-scrollbars();
+
+  .category-item {
+    .category-anchor {
+      height: 100%;
+      text-decoration: none;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      .category-title {
+        margin: auto;
+        text-transform: uppercase;
+        font-weight: 400;
+        font-size: 18px;
+        letter-spacing: 1px;
+        padding: calc((var(--page-margin) / 4) * 3) var(--page-margin);
+        color: var(--ion-color-lightest);
+        background-color: var(--page-category-background);
+        border-radius: var(--app-fair-radius);
+      }
+    }
+  }
+
+  
+
+  .travel-category {
+    --page-category-background: #00AFFF;
+    --page-category-background-rgb: 0,175,255;
+  }
+
+  .fashion-category {
+    --page-category-background: #cb328f;
+    --page-category-background-rgb: 203,50,143;
+  }
+
+  .food-category {
+    --page-category-background: #ebbb00;
+    --page-category-background-rgb: 235,187,0;
+  }
+
+  .deals-category {
+    --page-category-background: #70df70;
+    --page-category-background-rgb: 112,223,112;
+  }
+
+  .real-estate-category {
+    --page-category-background: #d9453a;
+    --page-category-background-rgb: 217,69,58;
+  }
+}
+
+ion-header ion-toolbar:first-of-type{
+  text-align: center;
+}
+
+.logo{
+  width: 60%;
+  margin-top: 5px;
+}
+.home_icon{
+  font-size: 25px;
+  margin-right: 5px;
+}
+.search_icon{
+  font-size: 25px;
+  margin-right: 10px;
+}
+.heart_icon{
+  font-size: 28px;
+  margin-right: 10px;
+}
+.copy_icon{
+  font-size: 25px;
+  margin-right: 10px;
+  color: white;
+}
+
+// *********************
+/* Split the screen in half */
+.split {
+  // height: 25%;
+  width: 100%;
+  z-index: 1;
+  position: relative;
+  // top: 0;
+  overflow-x: hidden;
+  // padding-top: 20px;
+  // border-bottom: 1px solid #09509d;
+  // border-top: 1px solid #9E9E9E;
+}
+
+/* Control the left side */
+
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  // width: 33.33%;
+  padding: 10px;
+  height: 100%; /* Should be removed. Only for demonstration */
+  // border: 1px solid;
+}
+
+.centered {
+  // position: absolute;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
+  // text-align: center;
+  color: balck;
+}
+.icon-delete-col{
+  position: absolute; 
+  top: 50%; 
+  left: 90%; 
+  transform: translate(-50%, -50%);
+  font-size: 25px;
+  color: #09509d;
+}
+
+.icon-share{
+  // float: right;
+  // padding-top: 2px;
+  // color: #09509d;
+  // padding-right: 10px;
+  // width: 12%;
+
+  width: 30px;
+  margin-bottom: -7px;
+  padding-right: 3px;
+}
+
+.icon-download{
+  // float: right;
+  // padding-top: 5px;
+  // font-size: 25px;
+  // color: #09509d;
+  // padding-right: 10px;
+  font-size: 22px;
+  margin-bottom: -4px;
+  padding-right: 3px;
+}
+
+.icon-delete{
+  // float: right;
+  // padding-top: 5px;
+  // font-size: 25px;
+  // color: #09509d;
+  // padding-right: 10px;
+
+  font-size: 22px;
+  margin-bottom: -5px;
+  padding-right: 3px;
+}
+
+/* Clear floats after the columns */
+// .row:after {
+//   content: "";
+//   display: table;
+//   clear: both;
+// }
+
+.tabCssClick{
+  border-right: 1px solid #09509d !important;
+  border-left: 1px solid #09509d !important;
+  padding: 10px 15px;
+  display: inline-block;
+  font-size: 14px;
+  text-align: center;
+  font-weight: 600;
+  text-decoration:underline;
+  color: #09509d;
+}
+
+.tabCss{
+  border-right: 1px solid #eae4e4;
+  padding: 10px 15px;
+  display: inline-block;
+  font-size: 14px;
+  text-align: center;
+  font-weight: 600;
+}
+
+
+.my-custom-class {
+  background: #e5e5e5;
+}
+
+.detail-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #09509d;
+  margin: 0px;
+  // margin-bottom: calc(var(--page-margin) / 2);
+  // text-align: center;
+}
+
+.text-msg{
+  font-size: 17px;
+  text-align: center;
+  margin-top: 50%;
+  // margin-top: 250px;
+  margin-left: 15px;
+  margin-right: 15px;
+  font-weight: 600;
+}
+
+.col-padding{
+  // padding-left: 10px !important;
+  // padding-right: 15px !important;
+  padding-top: 10px !important;
+  border-top: 1px solid #09509d;
+  border-bottom: 1px solid #09509d;
+  padding-bottom: 10px !important;
+  text-align: center;
+  // margin-bottom: 5px;
+  // margin-top: -10px;
+}
+.main-title{
+  // font-size: 17px;
+  color: #09509d;
+  font-weight: bold;
+}
+
+.total-product{
+  // font-size: 17px;
+  padding-right: 10px !important;
+  color: #09509d;
+  font-weight: bold;
+  float: right;
+}
+
+
+.div-fixed{
+  position: fixed;
+  z-index: 999;
+  background-color: white;
+  border-bottom: 1px solid #09509d;
+  width: 100%;
+  overflow-y: auto;
+}

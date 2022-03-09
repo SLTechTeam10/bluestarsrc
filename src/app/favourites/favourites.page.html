@@ -1,0 +1,128 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <img class="logo" src="assets/logo.png">
+    <ion-buttons slot="end">
+      <!-- <ion-icon name="copy-outline" class="copy_icon"></ion-icon> -->
+      <ion-icon name="home-outline" class="home_icon" [routerLink]="['/categories']"></ion-icon>
+      <!-- <ion-icon name="heart-outline" class="heart_icon" [routerLink]="['/favourites']"></ion-icon> -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <div style="width:100%; margin-bottom: 5px; margin-top: 5px;">
+    <div class="tabCss" style="width: 20%;" (click)="clickOnCategary('All')"
+      [ngClass]="allProductFlage ? 'tabCssClick' : 'tabCss'">All Products</div>
+    <div class="tabCss" style="width: 23%;" (click)="clickOnCategary('Air Conditioner')"
+      [ngClass]="airConditionerFlage ? 'tabCssClick' : 'tabCss'">Air Conditioner</div>
+    <div class="tabCss" style="width: 18%;" (click)="clickOnCategary('Air Cooler')"
+      [ngClass]="airCoolerFlage ? 'tabCssClick' : 'tabCss'">Air Cooler</div>
+    <div class="tabCss" style="width: 18%;" (click)="clickOnCategary('Air Purifier')"
+      [ngClass]="airPurifierFlage ? 'tabCssClick' : 'tabCss'">Air Purifier</div>
+    <div class="tabCss" style="width: 21%;" (click)="clickOnCategary('Water Purifier')"
+      [ngClass]="waterPurifierFlage ? 'tabCssClick' : 'tabCss'">Water Purifier</div>
+  </div> -->
+
+  <!-- <div class="details-description-wrapper" style="padding: 15px;padding-bottom: 0px;border-top: 1px solid #eae4e4;">
+    <h3 class="detail-title">My Products</h3>
+  </div> -->
+  <div class="div-fixed">
+  <div style="overflow-x: auto; white-space: nowrap;">
+      <div class="tabCss" (click)="clickOnCategary('All')" 
+        [ngClass]="allProductFlage ? 'tabCssClick' : 'tabCss'">
+        <img class="categoryIcons" src="assets/categoryIcons/All-Product.png" />
+        All <br/> Products
+      </div>
+      <div class="tabCss" (click)="clickOnCategary('Air Conditioners')"
+        [ngClass]="airConditionerFlage ? 'tabCssClick' : 'tabCss'">
+        <img class="categoryIcons" src="assets/categoryIcons/Air-Conditioner.png" />
+        Air <br/> Conditioners
+      </div>
+      <div class="tabCss" (click)="clickOnCategary('Air Coolers')" [ngClass]="airCoolerFlage ? 'tabCssClick' : 'tabCss'">
+        <img class="categoryIcons" src="assets/categoryIcons/Air-Cooler.png" />
+        Air <br/> Coolers
+      </div>
+       <div class="tabCss" (click)="clickOnCategary('Deep Freezer')"
+        [ngClass]="deepFreezerFlage ? 'tabCssClick' : 'tabCss'">
+        <img class="categoryIcons" src="assets/categoryIcons/Deep-Freezer.png" />
+        Deep <br/> Freezers
+      </div>
+      <div class="tabCss" (click)="clickOnCategary('Water Purifiers')"
+        [ngClass]="waterPurifierFlage ? 'tabCssClick' : 'tabCss'">
+        <img class="categoryIcons" src="assets/categoryIcons/Water-Purifier.png" />
+        Water <br/> Purifiers
+      </div>
+      <div class="tabCss" (click)="clickOnCategary('Bottled Water Dispenser')"
+        [ngClass]="bottledWaterDispenserFlage  ? 'tabCssClick' : 'tabCss'">
+        <img class="categoryIcons" src="assets/categoryIcons/Bottled-Water.png" />
+        Bottled Water <br/> Dispensers
+      </div>
+       <div class="tabCss" (click)="clickOnCategary('Air Purifiers')"
+        [ngClass]="airPurifierFlage ? 'tabCssClick' : 'tabCss'">
+        <img class="categoryIcons" src="assets/categoryIcons/Air-Purifier.png" />
+        Air <br/> Purifiers
+      </div>
+      <div class="tabCss" (click)="clickOnCategary('Visi Cooler')"
+        [ngClass]="visiCoolerFlage  ? 'tabCssClick' : 'tabCss'">
+        <img class="categoryIcons" src="assets/categoryIcons/Visi-Cooler.png" />
+        Visi <br/> Coolers
+      </div>
+    </div>  
+
+  <ion-row>
+    <ion-col class="col-padding">
+      <span class="main-title">My Products</span>
+      <span class="total-product" *ngIf="total_product > 0">Total Products : {{total_product}}</span>
+    </ion-col>
+  </ion-row>
+  </div>
+
+  <div style="margin-top: 175px;">
+  <div *ngFor="let item of product_listing" style="border-bottom: 1px solid #09509d;">
+   
+    <div class="split">
+
+      <div class="column" style="width: 30%;">
+        <div (click)="goToProductDetalPage(item.ID, item.SKUCode, item.ProductTitle, item.Image)">
+          <app-image-shell style="width: 100%; height: 100%;" animation="spinner" [src]="item.Image">
+          </app-image-shell>
+        </div>
+      </div>
+
+      <div class="column" style="width: 70%;">
+        <div class="centered" (click)="goToProductDetalPage(item.ID, item.SKUCode, item.ProductTitle, item.Image)">
+          <p>{{item.SKUCode}}</p>
+          <p>{{item.ProductTitle}}</p>
+          <p *ngIf="(item.MRP != null && item.MRP != '') || (item.Price != null && item.Price != '')">
+            MRP: &#x20B9;{{formatNumber(item)}}</p>
+        </div>
+      </div>
+    </div>
+
+    <ion-row style="margin-bottom: 5px;">
+
+      <ion-col size="4" style="text-align: center;color: #09509d;" (click)="downloadPdf(item)">
+        <ion-icon name="download-outline" class="icon-download"></ion-icon>
+        <span>Download</span>
+      </ion-col>
+      <ion-col size="4" style="text-align: center;color: #09509d;" (click)="deleteImage(item.ID)">
+        <ion-icon class="icon-delete" name="trash"></ion-icon>
+        <span>Remove</span>
+      </ion-col>
+      <ion-col size="4" style="text-align: center;color: #09509d;padding-top: 0px;"
+        (click)="showSharePopover(item.ID,item)">
+        <img class="icon-share" src="assets/share.png">
+        <span>Share</span>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div *ngIf="product_listing.length == 0">
+    <div class="text-msg">Please go to any product and tap on the "heart icon" for it to be shown here.</div>
+  </div>
+  </div>
+
+</ion-content>

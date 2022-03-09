@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1032851411369",
+    "firebase_url": "https://ecatalog-a4ccb.firebaseio.com",
+    "project_id": "ecatalog-a4ccb",
+    "storage_bucket": "ecatalog-a4ccb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032851411369:android:a5604135932fbab7a9b4b8",
+        "android_client_info": {
+          "package_name": "com.app.bluestar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1032851411369-4q5gim4vva6v5h04qs541ohblqpp2p2s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3h1wiMSFnh0skxFxEv_rsZHmH3EKtxB0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1032851411369-4q5gim4vva6v5h04qs541ohblqpp2p2s.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1032851411369-iah90smb59g1m1a3u6usv5u8dnahpk3v.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bluestarindia.appname"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

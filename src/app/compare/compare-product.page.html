@@ -1,0 +1,428 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <img class="logo" src="assets/logo.png">
+    <ion-buttons slot="end">
+      <ion-icon name="home-outline" class="menu_icon" [routerLink]="['/categories']"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="fashion-listing-content">
+  <ion-row class="row-margin">
+    <ion-col size="10">
+        <h3 class="main-title">Compare Product</h3>
+    </ion-col>
+    <ion-col *ngIf="product_listing.length != 3" size="2" style="text-align: right;" (click)="goToProductListPage()">
+      <ion-icon name="add-circle-outline" class="icon_add"></ion-icon>
+    </ion-col>
+  </ion-row>
+
+
+  <div *ngIf="product_listing.length == 1" style="margin-left: 8px; margin-right: 8px;">
+    <ion-row class="items-row" style="border-left: 1px solid #09509d;">
+      <ion-col size="12" class="listing-item col-border" *ngFor="let item of product_listing">
+        <ion-row>
+          <ion-col size="12">
+            <div (click)="removeProductFromCompareList(item.ID)">
+              <ion-icon name="close" class="icon-close"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col size="12" style="text-align: center;">
+            <a class="image-anchor">
+              <img style="height: 100px;" [src]="item.Image">
+            </a>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-row class="item-body">
+
+              <ion-col size="12">
+                <ion-row class="secondary-info">
+                  <ion-col class="price-col">
+                    <span class="item-sale-price">
+                      <app-text-shell class="product-text" animation="gradient" [data]="item.SKUCode">
+                      </app-text-shell>
+                    </span>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+              <ion-col size="12" class="main-info">
+                <h4 class="item-name">
+                  <a class="name-anchor">
+                    <app-text-shell animation="gradient" [data]="item.ProductTitle">
+                    </app-text-shell>
+                  </a>
+                </h4>
+              </ion-col>
+              <ion-col class="price-col" style="padding-bottom: 5px; ">
+                <span class="item-sale-price">
+                  MRP: &#x20B9;{{formatNumber(item.MRP)}}
+                </span>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row style="width: 70%; margin: 0 auto;">
+      <ion-col>
+        <ion-item lines="none">
+          <ion-label>Comparison Criteria</ion-label>
+          <ion-select placeholder="Comparison Criteria" [(ngModel)]="titleProduct" (ionChange)="showDataByTitle(titleProduct)">
+            <ion-select-option *ngFor="let data of sorted_products; let i=index" value="{{data.title}}">{{data.title}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row> -->
+
+    <ion-row style="margin-top: 10px;">
+      <ion-col size="12" style="padding-bottom: 15px; text-align: center;">
+        <ion-checkbox style="margin-bottom: -4px;" (click)="showDifferenceOnly(!showDifferenceFlage)"></ion-checkbox>
+        <span style="margin-left: 5px;">Show differences only</span>
+      </ion-col>
+    </ion-row>
+
+    <!-- <div>
+      <table style="width:100%">
+        <tbody *ngFor="let obj of sorted_products; let i = index">
+          <tr>
+            <th colspan="1" [ngClass]="selectedTitle == obj.title ? 'selectedColor' : 'defoultColor'">{{obj.title}}</th>
+          </tr>
+          <tr>
+            <td *ngFor="let subData of obj.data; let j = index" style="text-align:center;" [id]="obj.title" [ngClass]="selectedTitle == obj.title ? 'selectedColor' : 'defoultColor2'">
+              {{subData.value}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+
+    <div *ngIf="product_listing[0].uspList.length != 0">
+      <div class="details-description-wrapper" style="border: 1px solid #09509d;border-bottom: unset;background-color: white;">
+        <h3 class="USP-title">Key Features</h3>
+      </div>
+      
+      <ion-row style="border: 1px solid #09509d;background-color: white;border-bottom: unset;">
+        <ion-col size="12">
+          <ul *ngFor="let item of product_listing[0].uspList; let i=index">
+            <li (click)="showUSPPopup(item)">{{item[0]}}</li>
+          </ul>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <!-- showPopup start -->
+    <ion-row *ngIf="showPopup" class="row-popup">
+      <ion-col size="12" class="col-background">
+        <div style="display: flex;">
+          <div style="width:90%" class="title-popup">{{USPTitle}}</div>
+          <div style="width:10%">
+            <ion-icon (click)="close()" name="close-outline" class="close_icon"></ion-icon>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col size="12" class="popup-description">
+        <div>{{USPDescription}}</div>
+      </ion-col>
+      
+    </ion-row>
+    <!-- showPopup end -->
+
+    <div class="col-border">
+      <div *ngFor="let obj of sorted_products; let i = index">
+        <ion-row style="border-left: 1px solid #09509d;">
+          <ion-col col-12 class="title-align" [id]="obj.title" [ngClass]="selectedTitle == obj.title ? 'selectedColor' : 'defoultColor'">
+            {{obj.title}}
+          </ion-col>
+        </ion-row>
+        <ion-row class="row-word">
+          <ion-col col-12 class="border-table" *ngFor="let subData of obj.data; let j = index" [ngClass]="selectedTitle == obj.title ? 'selectedColor' : 'defoultColor2'">{{subData.value}}</ion-col>
+        </ion-row>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="product_listing.length == 2" style="margin-left: 8px; margin-right: 8px;">
+    <ion-row class="items-row" style="border-left: 1px solid #09509d;">
+      <ion-col size="6" class="listing-item col-border" *ngFor="let item of product_listing">
+        <ion-row>
+          <ion-col size="12">
+            <div (click)="removeProductFromCompareList(item.ID)">
+              <ion-icon name="close" class="icon-close"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col size="12" style="text-align: center;">
+            <a class="image-anchor">
+              <img style="height: 100px;" [src]="item.Image">
+            </a>
+          </ion-col>
+
+          <ion-col size="12" class="row-contains">
+            <ion-row class="item-body">
+
+              <ion-col size="12">
+                <ion-row class="secondary-info">
+                  <ion-col class="price-col">
+                    <span class="item-sale-price">
+                      <app-text-shell class="product-text" animation="gradient" [data]="item.SKUCode">
+                      </app-text-shell>
+                    </span>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+              <ion-col size="12" class="main-info" style="padding-bottom: 50px;">
+                <h4 class="item-name">
+                  <a class="name-anchor">
+                    <app-text-shell animation="gradient" [data]="item.ProductTitle">
+                    </app-text-shell>
+                  </a>
+                </h4>
+              </ion-col>
+              <ion-col class="price-col" class="col-contains">
+                <span class="item-sale-price">
+                  MRP: &#x20B9;{{formatNumber(item.MRP)}}
+                </span>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row style="width: 70%; margin: 0 auto;">
+      <ion-col>
+        <ion-item lines="none">
+          <ion-label>Comparison Criteria</ion-label>
+          <ion-select placeholder="Comparison Criteria" [(ngModel)]="titleProduct" (ionChange)="showDataByTitle(titleProduct)">
+            <ion-select-option *ngFor="let data of sorted_products; let i=index" value="{{data.title}}">{{data.title}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row> -->
+
+    <ion-row style="margin-top: 10px;">
+      <ion-col size="12" style="padding-bottom: 15px; text-align: center;">
+        <ion-checkbox style="margin-bottom: -4px;" (click)="showDifferenceOnly(!showDifferenceFlage)"></ion-checkbox>
+        <span style="margin-left: 5px;">Show differences only</span>
+      </ion-col>
+    </ion-row>
+
+    <!-- <div>
+      <table style="width:100%">
+        <tbody *ngFor="let obj of sorted_products; let i = index">
+          <tr>
+            <th colspan="2" [ngClass]="selectedTitle == obj.title ? 'selectedColor' : 'defoultColor'">{{obj.title}}</th>
+          </tr>
+          <tr>
+            <td *ngFor="let subData of obj.data; let j = index" style="text-align:center;" [id]="obj.title" [ngClass]="selectedTitle == obj.title ? 'selectedColor' : 'defoultColor2'">
+              {{subData.value}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+
+    <div *ngIf="product_listing[0].uspList.length > 0 || product_listing[1].uspList.length > 0">
+      <div class="details-description-wrapper" style="border: 1px solid #09509d;border-bottom: unset;background-color: white;">
+        <h3 class="USP-title">Key Features</h3>
+      </div>
+
+      <ion-row style="border: 1px solid #09509d;border-right: unset;background-color: white;border-bottom: unset;">
+
+        <ion-col size="6" style="border-right: 1px solid #09509d;">
+          <ul *ngFor="let item of product_listing[0].uspList; let i=index">
+            <li (click)="showUSPPopup(item)">{{item[0]}}</li>
+          </ul>
+        </ion-col>
+
+        <ion-col size="6" style="border-right: 1px solid #09509d;">
+          <ul *ngFor="let item of product_listing[1].uspList; let i=index">
+            <li (click)="showUSPPopup(item)">{{item[0]}}</li>
+          </ul>
+        </ion-col>
+      </ion-row>
+      
+    </div>
+
+    <!-- showPopup start -->
+    <ion-row *ngIf="showPopup" class="row-popup">
+      <ion-col size="12" class="col-background">
+        <div style="display: flex;">
+          <div style="width:90%" class="title-popup">{{USPTitle}}</div>
+          <div style="width:10%">
+            <ion-icon (click)="close()" name="close-outline" class="close_icon"></ion-icon>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col size="12" class="popup-description">
+        <div>{{USPDescription}}</div>
+      </ion-col>
+      
+    </ion-row>
+    <!-- showPopup end -->
+
+    <div class="col-border">
+      <div *ngFor="let obj of sorted_products; let i = index">
+        <ion-row style="border-left: 1px solid #09509d;">
+          <ion-col col-12 class="title-align" [id]="obj.title" [ngClass]="selectedTitle == obj.title ? 'selectedColor' : 'defoultColor'">
+            {{obj.title}}
+          </ion-col>
+        </ion-row>
+        <ion-row class="row-word">
+          <ion-col col-6 class="border-table" *ngFor="let subData of obj.data; let j = index" [ngClass]="selectedTitle == obj.title ? 'selectedColor' : 'defoultColor2'">{{subData.value}}</ion-col>
+        </ion-row>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="product_listing.length == 3" style="margin-left: 8px; margin-right: 8px;">
+    <ion-row class="items-row" style="border-left: 1px solid #09509d;">
+      <ion-col size="4" class="listing-item col-border" *ngFor="let item of product_listing">
+        <ion-row>
+          <ion-col size="12">
+            <div (click)="removeProductFromCompareList(item.ID)">
+              <ion-icon name="close" class="icon-close"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col size="12" style="text-align: center;">
+            <a class="image-anchor">
+              <img style="height: 100px;" [src]="item.Image">
+            </a>
+          </ion-col>
+
+          <ion-col size="12" class="row-contains">
+            <ion-row class="item-body">
+
+              <ion-col size="12">
+                <ion-row class="secondary-info">
+                  <ion-col class="price-col">
+                    <span class="item-sale-price">
+                      <app-text-shell class="product-text" animation="gradient" [data]="item.SKUCode">
+                      </app-text-shell>
+                    </span>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+              <ion-col size="12" class="main-info" style="padding-bottom: 50px;">
+                <h4 class="item-name">
+                  <a class="name-anchor">
+                    <app-text-shell animation="gradient" [data]="item.ProductTitle">
+                    </app-text-shell>
+                  </a>
+                </h4>
+              </ion-col>
+              <ion-col class="price-col" class="col-contains">
+                <span class="item-sale-price">
+                  MRP: &#x20B9;{{formatNumber(item.MRP)}}
+                </span>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row style="width: 70%; margin: 0 auto;">
+      <ion-col>
+        <ion-item lines="none">
+          <ion-label>Comparison Criteria</ion-label>
+          <ion-select placeholder="Comparison Criteria" [(ngModel)]="titleProduct" (ionChange)="showDataByTitle(titleProduct)">
+            <ion-select-option *ngFor="let data of sorted_products; let i=index" value="{{data.title}}">{{data.title}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row> -->
+
+    <ion-row style="margin-top: 10px;">
+      <ion-col size="12" style="padding-bottom: 15px; text-align: center;">
+        <ion-checkbox style="margin-bottom: -4px;" (click)="showDifferenceOnly(!showDifferenceFlage)"></ion-checkbox>
+        <span style="margin-left: 5px;">Show differences only</span>
+      </ion-col>
+    </ion-row>
+
+    <!-- <div>
+      <table style="width:100%">
+        <tbody *ngFor="let obj of sorted_products; let i = index">
+          <tr>
+            <th colspan="3" [ngClass]="selectedTitle == obj.title ? 'selectedColor' : 'defoultColor'">{{obj.title}}</th>
+          </tr>
+          <tr>
+            <td *ngFor="let subData of obj.data; let j = index" style="text-align:center;" [id]="obj.title" [ngClass]="selectedTitle == obj.title ? 'selectedColor' : 'defoultColor2'">
+              {{subData.value}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+
+    <div *ngIf="product_listing[0].uspList.length > 0 || product_listing[1].uspList.length > 0 || product_listing[2].uspList.length > 0">
+      <div class="details-description-wrapper" style="border: 1px solid #09509d;border-bottom: unset;background-color: white;">
+        <h3 class="USP-title">Key Features</h3>
+      </div>
+      <ion-row style="border: 1px solid #09509d;border-right: unset;background-color: white;border-bottom: unset;">
+
+        <ion-col size="4" style="border-right: 1px solid #09509d;">
+          <ul *ngFor="let item of product_listing[0].uspList; let i=index">
+            <li (click)="showUSPPopup(item)">{{item[0]}}</li>
+          </ul>
+        </ion-col>
+
+        <ion-col size="4" style="border-right: 1px solid #09509d;">
+          <ul *ngFor="let item of product_listing[1].uspList; let i=index">
+            <li (click)="showUSPPopup(item)">{{item[0]}}</li>
+          </ul>
+        </ion-col>
+
+        <ion-col size="4" style="border-right: 1px solid #09509d;">
+          <ul *ngFor="let item of product_listing[2].uspList; let i=index">
+            <li (click)="showUSPPopup(item)">{{item[0]}}</li>
+          </ul>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <!-- showPopup start -->
+    <ion-row *ngIf="showPopup" class="row-popup">
+      <ion-col size="12" class="col-background">
+        <div style="display: flex;">
+          <div style="width:90%" class="title-popup">{{USPTitle}}</div>
+          <div style="width:10%">
+            <ion-icon (click)="close()" name="close-outline" class="close_icon"></ion-icon>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col size="12" class="popup-description">
+        <div>{{USPDescription}}</div>
+      </ion-col>
+      
+    </ion-row>
+    <!-- showPopup end -->
+
+    <div class="col-border">
+      <div *ngFor="let obj of sorted_products; let i = index">
+        <ion-row style="border-left: 1px solid #09509d;">
+          <ion-col col-12 class="title-align" [id]="obj.title" [ngClass]="selectedTitle == obj.title ? 'selectedColor' : 'defoultColor'">
+            {{obj.title}}
+          </ion-col>
+        </ion-row>
+        <ion-row class="row-word">
+          <ion-col col-4 class="border-table" *ngFor="let subData of obj.data; let j = index" [ngClass]="selectedTitle == obj.title ? 'selectedColor' : 'defoultColor2'">{{subData.value}}</ion-col>
+        </ion-row>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div *ngIf="noRecords == 0">
+    <div class="text-msg">Please go to any product and tap on the "add to compare" button for it to be shown here.</div>
+  </div>
+</ion-content>

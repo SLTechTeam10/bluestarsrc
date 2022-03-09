@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <img class="logo" src="assets/logo.png">
+    <ion-buttons slot="end">
+        <!-- <ion-badge class="bedge-notification">20</ion-badge> -->
+      <ion-badge *ngIf="countNotification != 0" class="bedge-notification">{{countNotification}}</ion-badge>
+      <ion-icon name="notifications-outline" class="notification_icon" [routerLink]="['/notifications']"></ion-icon>
+      <ion-icon name="heart-outline" class="heart_icon" [routerLink]="['/favourites']"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  [scrollEvents]="true" (ionScroll)="logScrolling($event)">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content pullingIcon="arrow-down" pullingText="Pull to refresh" refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+      </ion-refresher-content>
+    </ion-refresher>
+
+      <div class="container">
+        <div class="div-height" (click)="goToProductListPage('Air Conditioners')">
+          <img class="banner-image" src="assets/air_conditionar.png">
+        </div>
+        <div class="div-height" (click)="goToProductListPage('Air Coolers')">
+          <img class="banner-image" src="assets/air_cooler.png">
+        </div>
+        <div class="div-height" (click)="goToProductListPage('Deep Freezer')">
+          <img  class="banner-image" src="assets/deep_freezer.png">
+        </div>
+        <div class="div-height" (click)="goToProductListPage('Water Purifiers')">
+          <img  class="banner-image" src="assets/water_purifier.png">
+        </div>
+        <div class="div-height" (click)="goToProductListPage('Bottled Water Dispenser')">
+          <img  class="banner-image" src="assets/bottled_water_dispenser.png">
+        </div>
+        <div class="div-height" (click)="goToProductListPage('Air Purifiers')">
+          <img  class="banner-image" src="assets/air_purifier.png">
+        </div>
+        <div class="div-height" (click)="goToProductListPage('Visi Cooler')">
+          <img  class="banner-image" src="assets/visi_cooler.png">
+        </div>
+      </div>
+
+
+      <div *ngIf="scroll" class="scrollbarDiv" (click)="scrollBottom()">
+        <ion-icon size="large" name="chevron-up-outline"></ion-icon> <br/>
+        Scroll Up to View More Products
+      </div>
+</ion-content>

@@ -1,0 +1,21 @@
+<ion-content>
+  <ion-list>
+    <ion-item-divider class="share-header">
+      <ion-label>
+        Share
+      </ion-label>
+    </ion-item-divider>
+    <ion-item (click)="shareByWhatsup()">
+      <ion-icon name="logo-whatsapp" class="icon-whatsapp" item-start></ion-icon>
+      <ion-label class="label-text">WhatsApp</ion-label>
+    </ion-item>
+    <ion-item (click)="shareByFacebook()">
+      <ion-icon name="logo-facebook" class="icon-fecebook" item-start></ion-icon>
+      <ion-label class="label-text">Facebook</ion-label>
+    </ion-item>
+    <ion-item (click)="shareByEmail()">
+      <ion-icon name="mail" style="color: #cc181ec9;" item-start></ion-icon>
+      <ion-label class="label-text">Email</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

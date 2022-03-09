@@ -1,0 +1,50 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar  color="primary">
+    <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <img class="logo" src="assets/logo.png">
+    <ion-buttons slot="end">
+      <ion-icon name="home-outline" class="menu_icon" [routerLink]="['/categories']"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="contact-card-content">
+
+  <ion-row class="user-details-wrapper">
+    <ion-col class="user-info-wrapper" size="12">
+        <ion-icon name="mail-open-outline"></ion-icon>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="user-preferences-wrapper row-border-bottom">
+    <ion-col size="12" class="align-col">
+      <ion-icon class="icon-color" name="mail-outline"></ion-icon>
+      <h4 class="preference-name">Write to us at</h4>
+      <p class="preference-value">
+        <a href="mailto:starcatalogue-support@bluestarindia.com">starcatalogue-support@bluestarindia.com</a>
+      </p>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="user-preferences-wrapper row-border-bottom">
+    <ion-col size="12" class="align-col" (click)="launchDialer('1800 209 1177')">
+        <ion-icon class="icon-color" name="phone-portrait-outline"></ion-icon>
+      <h4 class="preference-name">Call us at</h4>
+      <p class="preference-value">
+        1800 209 1177
+      </p>
+    </ion-col>
+  </ion-row>
+
+<ion-row class="user-preferences-wrapper">
+    <ion-col size="12" class="align-col">
+        <ion-icon class="icon-color" name="globe-outline"></ion-icon>
+      <h4 class="preference-name">Or visit</h4>
+      <p class="preference-value">
+          <a href="https://www.bluestarindia.com">https://www.bluestarindia.com</a>
+      </p>
+    </ion-col>
+  </ion-row>
+</ion-content>

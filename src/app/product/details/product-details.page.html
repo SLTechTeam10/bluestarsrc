@@ -1,0 +1,298 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="app/categories/product"></ion-back-button>
+    </ion-buttons>
+    <img class="logo" src="assets/logo.png">
+    <!-- <ion-title>Product Details</ion-title> -->
+    <ion-buttons slot="end">
+      <!-- <ion-icon name="search-outline" class="copy_icon"></ion-icon> -->
+      <!-- <ion-icon name="copy-outline" class="copy_icon" [routerLink]="['/compare']"></ion-icon> -->
+      <ion-icon name="copy-outline" class="copy_icon" (click)="showComparePage()"></ion-icon>
+      <ion-icon name="heart-outline" class="heart_icon" [routerLink]="['/favourites']"></ion-icon>
+      <ion-icon name="home-outline" class="menu_icon" [routerLink]="['/categories']"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="fashion-details-content">
+  <ng-container *ngIf="product_detail">
+    <ion-row class="main-title-row">
+      <ion-col>
+        <span class="main-title">{{categoryName}}</span>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="slider-row" *ngIf="images.length == 1">
+      <ion-col size="12" *ngIf="favouritesFlage == false">
+        <ion-icon name="heart-outline" class="icon-heart-black" (click)="clickOnFavourites()"></ion-icon>
+      </ion-col>
+      <ion-col size="12" *ngIf="favouritesFlage == true">
+        <ion-icon name="heart" class="icon-heart-red" (click)="clickOnFavourites()"></ion-icon>
+      </ion-col>
+      <ion-col size="12">
+        <ion-slides class="details-slides" [options]="slidesOptions" #slides (ionSlideDidChange)="getIndex()">
+          <ion-slide class="" *ngFor="let image of images">
+            <!-- (click)="openZoomPopup(images)" -->
+            <ion-row class="slide-inner-row" (click)="openZoomPopup(images)">
+              <app-image-shell style="height: 127px;" animation="spinner" class="showcase-image" [ngClass]="{'centered-image': (image.type === 'square'), 'fill-image': (image.type === 'fill')}"
+                [src]="image">
+                <!-- <app-aspect-ratio [ratio]="{w:64, h:50}">
+              </app-aspect-ratio> -->
+              </app-image-shell>
+            </ion-row>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row class="slider-row" *ngIf="images.length != 1">
+      <ion-col size="12" *ngIf="favouritesFlage == false">
+        <ion-icon name="heart-outline" class="icon-heart-black" (click)="clickOnFavourites()"></ion-icon>
+      </ion-col>
+      <ion-col size="12" *ngIf="favouritesFlage == true">
+        <ion-icon name="heart" class="icon-heart-red" (click)="clickOnFavourites()"></ion-icon>
+      </ion-col>
+      <ion-col size="12">
+        <ion-slides class="details-slides" pager="true" [options]="slidesOptions" #slides (ionSlideDidChange)="getIndex()">
+          <ion-slide class="" *ngFor="let image of images">
+            <!-- (click)="openZoomPopup(images)" -->
+            <ion-row class="slide-inner-row" (click)="openZoomPopup(images)">
+              <app-image-shell style="height: 127px;" animation="spinner" class="showcase-image" [ngClass]="{'centered-image': (image.type === 'square'), 'fill-image': (image.type === 'fill')}"
+                [src]="image">
+                <!-- <app-aspect-ratio [ratio]="{w:64, h:50}">
+              </app-aspect-ratio> -->
+              </app-image-shell>
+            </ion-row>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+    </ion-row>
+    
+    <!-- <div class="description-wrapper">
+    <h3 class="details-name">
+      <app-text-shell animation="gradient" [data]="details?.name"></app-text-shell>
+    </h3>
+    <span class="details-brand">
+      <app-text-shell animation="gradient" [data]="details?.brand"></app-text-shell>
+    </span>
+    <span class="details-price">
+      <app-text-shell animation="gradient" [data]="details?.price | currency"></app-text-shell>
+    </span>
+    <span class="details-sale-price">
+      <app-text-shell animation="gradient" [data]="details?.salePrice | currency"></app-text-shell>
+    </span>
+  </div> -->
+    <!-- (click)="presentShare()" -->
+    <ion-row class="product-title">
+      <ion-col size="8" style="margin-top: 5px; font-weight: 600;">
+        <span>{{productName}}</span>
+        <div style="font-weight: 600;color: rgb(9, 80, 157);margin-top: 5px;" *ngIf="MRP != null && MRP != ''"><span>
+            <!-- MRP: &#x20B9;{{MRP | number}} -->
+            MRP: &#x20B9;{{formatNumber(MRP)}}
+
+          </span></div>
+      </ion-col>
+      <ion-col size="4" style="text-align: right; color: #09509d;" (click)="shareMethod()">
+        <!-- <ion-icon class="icon_share" name="share-outline"></ion-icon> -->
+        <img class="icon-share" src="assets/share.png">
+        <span>Share</span>
+      </ion-col>
+    </ion-row>
+    <!-- <ion-list>
+      <ion-item style="margin-right: 10px;">
+        <ion-label>INVCASSETTE</ion-label>
+        <ion-icon style="padding-right: 5px;" name="share-alt" item-end></ion-icon>
+       <span> Share</span>
+      </ion-item>
+  </ion-list> -->
+
+    <ion-row class="details-purchase-options-row" style="padding-bottom: 0px;">
+      <!-- <ion-col size="12" class="aux-action-col">
+      <ion-button class="size-chart-btn" color="medium" size="small" fill="clear">Size Chart</ion-button>
+    </ion-col> -->
+      <!-- <ion-col size="6">
+      <ion-button class="select-variant-btn" style="font-weight: 600;" color="medium" (click)="addToCompare()" expand="block" fill="outline">Add to Compare</ion-button>
+    </ion-col> -->
+      <ion-col size="6" class="btn-padding-compare">
+        <ion-button class="select-variant-btn" (click)="addToCompare()" expand="block">{{btnCompareText}}</ion-button>
+      </ion-col>
+      <ion-col size="6" class="btn-padding-download">
+        <ion-button class="select-variant-btn" (click)="indicatorDownload()" expand="block">Download</ion-button>
+      </ion-col>
+      <!-- style="font-weight: 600;margin: 0 auto; width: 50%;" -->
+      <!-- <ion-col size="12" class="main-call-to-action-col">
+      <ion-button class="add-to-cart-btn" color="dark" expand="block" fill="solid">Add to cart</ion-button>
+    </ion-col> -->
+    </ion-row>
+
+    <!-- <div *ngIf="reasonsToBuyFlage" class="details-description-wrapper"
+      style="padding-bottom: 0px; padding-top: 10px;width: 100%;">
+      <h3 class="detail-title">Reasons To Buy</h3>
+    </div>
+    <ion-row class="slider-row" *ngIf="reasonsToBuyFlage">
+      <ion-col size="12">
+        <ion-slides class="details-slides" pager="true" [options]="slidesOptions">
+          <ion-slide class="" *ngFor="let image of reasonsToBuyImageArray">
+            <ion-row class="slide-inner-row">
+              <app-image-shell animation="spinner" class="showcase-image2"
+                [ngClass]="{'centered-image': (image.type === 'square'), 'fill-image': (image.type === 'fill')}"
+                [src]="image">
+              </app-image-shell>
+            </ion-row>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+    </ion-row> -->
+
+
+    <!-- USP Start-->
+
+    <div *ngIf="uspList.length != 0"> 
+    <div class="details-description-wrapper" style="padding-bottom: 5px; padding-top: 15px;">
+      <h3 class="detail-title">Key Features</h3>
+    </div>
+
+    <ion-row>
+      <ion-col>
+        <ul *ngFor="let item of uspList; let i=index;">
+          <li (click)="showUSPPopup(item)">{{item[0]}}</li>
+        </ul>
+      </ion-col>
+    </ion-row>
+    </div>
+
+    <!-- showPopup start -->
+    <ion-row *ngIf="showPopup" class="row-popup">
+      <ion-col size="12" class="col-background">
+        <div style="display: flex;">
+          <div style="width:90%" class="title-popup">{{USPTitle}}</div>
+          <div style="width:10%">
+            <ion-icon (click)="close()" name="close-outline" class="close_icon"></ion-icon>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col size="12" class="popup-description">
+        <div>{{USPDescription}}</div>
+      </ion-col>
+      
+    </ion-row>
+    <!-- showPopup end -->
+
+
+     <!-- USP End -->
+
+      <!-- show Compare Popup start -->
+    <ion-row *ngIf="showComparePopup" class="row-popup-Compare">
+      <ion-col size="12" class="col-background">
+        <div style="display: flex;">
+
+          <div *ngIf="!flagSameCategory" style="width:90%" class="title-popup-compare">Remove at least one product to proceed. You can compare up to 3 product at time</div>
+          <div *ngIf="flagSameCategory" style="width:90%" class="title-popup-compare">Please add the product of the same category for comparison</div>
+          
+          <div style="width:10%">
+            <ion-icon (click)="closeComparePopup()" name="close-outline" class="close_icon"></ion-icon>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col size="12" class="compare-popup-padding">
+       
+
+        <div class="split" style="display: flex;" *ngFor="let item of product_listing">
+
+          <div class="column" style="width: 20%;">
+
+              <div class="col-checkbox">
+                <ion-checkbox (click)="AddIds(item.ID)"></ion-checkbox>
+              </div>
+            </div>
+
+          <div class="column" style="width: 30%;">
+            <div>
+                <app-image-shell style="width: 100%; height: 100%;" animation="spinner" [src]="item.Image">
+                  </app-image-shell>
+            </div>
+          </div>
+    
+          <div class="column" style="width: 70%;">
+            <div class="centered" >
+                <p style="margin-bottom: 5px;">{{item.SKUCode}}</p>
+                <p style="margin-top: 5px;">{{item.ProductTitle}}</p>
+            </div>
+          </div>
+    
+        </div>
+
+        <ion-row *ngIf="noRecords != 0" class="row-btn">
+          <ion-col size="12">
+           <ion-button class="select-variant-btn" (click)="removeProductFromCompareList()" expand="block">Remove</ion-button>
+         </ion-col>
+       </ion-row> 
+
+       <div *ngIf="noRecords == 0">
+        <div class="text-msg">Please go to any product and tap on the "add to compare" button for it to be shown here.</div>
+      </div>
+
+      </ion-col>
+      
+    </ion-row>
+    <!-- show Compare Popup end -->
+
+
+    <!-- <div class="details-description-wrapper" style="padding-bottom: 0px;">
+    <h3 class="detail-title">Key Features</h3>
+    <p class="details-description">
+      <app-text-shell animation="gradient" [data]="details?.description" lines="5"></app-text-shell>
+    </p>
+  </div> -->
+
+    <!-- <ion-list style="display: flex; padding-left: 15px; padding-right: 5px;">
+    <ion-thumbnail style="height: 40px;width: 40px;">
+      <img src="assets/sample-images/ionicthemes_logo.jpg">
+    </ion-thumbnail>
+    <p style="margin-left: 8px; font-size: 15px;">Smart Detect Technology</p>
+  </ion-list>
+
+  <ion-list style="display: flex; padding-left: 15px; padding-right: 5px;">
+    <ion-thumbnail style="height: 40px;width: 40px;">
+      <img src="assets/sample-images/ionicthemes_logo.jpg">
+    </ion-thumbnail>
+    <p style="margin-left: 8px; font-size: 15px;">Hydrophilic Gold Fin For Protection</p>
+  </ion-list>
+
+  <ion-list style="display: flex; padding-left: 15px; padding-right: 5px;">
+    <ion-thumbnail style="height: 40px;width: 40px;">
+      <img src="assets/sample-images/ionicthemes_logo.jpg">
+    </ion-thumbnail>
+    <p style="margin-left: 8px; font-size: 15px;">IFeel Technology</p>
+  </ion-list> -->
+
+
+    <!-- <div class="details-description-wrapper">
+    <h3 class="detail-title">Looking after me</h3>
+    <p class="details-description">
+      <app-text-shell animation="gradient" [data]="details?.careInstructions" lines="3"></app-text-shell>
+    </p>
+  </div> -->
+    <div class="details-description-wrapper" style="padding-bottom: 10px; padding-top: 10px;">
+      <h3 class="detail-title">Product Specifications</h3>
+      <!-- <span class="details-description product-code">
+      <app-text-shell animation="gradient" [data]="details?.upc"></app-text-shell>
+    </span> -->
+    </div>
+    <!-- style="background-color: #d4e3ea;" -->
+    <div>
+      <ion-row style="font-size: 15px;" *ngFor="let item of productDetails; let i = index" [style.background]="i%2 ===0? 'rgba(175, 202, 214)': 'rgb(227, 235, 239)'">
+        <ion-col size="6" style="padding-left: 10px;padding-right: 10px;">
+          <div>{{item.title}}</div>
+        </ion-col>
+        <ion-col size="6" style="padding-left: 10px;padding-right: 10px;">
+          <div>{{item.value}}</div>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ng-container>
+</ion-content>

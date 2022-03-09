@@ -1,0 +1,42 @@
+.split {
+    height: 25%;
+    width: 100%;
+    z-index: 1;
+    position: relative;
+    overflow-x: hidden;
+  }
+  
+  .column {
+    float: left;
+    padding: 10px;
+    height: 100%; 
+  }
+  
+  .centered {
+    color: black;
+  }
+
+  .col-checkbox{
+    position: absolute; 
+    top: 50%; 
+    left: 10%; 
+    transform: translate(-50%, -50%);
+    font-size: 25px;
+    color: #09509d;
+  }
+
+  .select-variant-btn {
+    margin: 0px;
+    text-transform: capitalize; 
+    // font-size: 1rem;
+    font-weight: 600;
+  }
+
+  ion-header ion-toolbar:first-of-type{
+    text-align: center;
+  }
+
+  .logo{
+    width: 60%;
+    margin-top: 5px;
+  }

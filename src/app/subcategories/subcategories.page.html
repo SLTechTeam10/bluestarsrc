@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <img class="logo" src="assets/logo.png">
+    <ion-buttons slot="end">
+        <!-- <ion-badge class="bedge-notification">20</ion-badge> -->
+      <ion-badge *ngIf="countNotification != 0" class="bedge-notification">{{countNotification}}</ion-badge>
+      <ion-icon name="notifications-outline" class="notification_icon" [routerLink]="['/notifications']"></ion-icon>
+      <ion-icon name="heart-outline" class="heart_icon" [routerLink]="['/favourites']"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-down" pullingText="Pull to refresh" refreshingSpinner="circles"
+          refreshingText="Refreshing...">
+        </ion-refresher-content>
+      </ion-refresher>
+
+    <ion-grid class="container" style="padding:0px !important;">
+      <ion-row class="container2">
+        <ion-col size="12" class="div-height" (click)="goToProductListPage('Deep Freezer')">
+          <img  class="banner-image" src="assets/deep_freezer.jpg">
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="container2">
+        <ion-col size="6" class="div-height" (click)="goToProductListPage('Deep Freezer')">
+          <img  class="banner-image" src="assets/bottle_water_dispenser.jpg">
+        </ion-col>
+        <ion-col size="6" class="div-height" (click)="goToProductListPage('Deep Freezer')">
+          <img  class="banner-image" src="assets/visi_cooler.jpg">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+</ion-content>

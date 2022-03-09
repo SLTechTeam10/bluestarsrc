@@ -1,0 +1,158 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <img class="logo" src="assets/logo.png">
+    <!-- <ion-title>Search</ion-title> -->
+    <ion-buttons slot="end">
+      <ion-icon name="heart-outline" class="heart_icon" [routerLink]="['/favourites']"></ion-icon>
+      <ion-icon name="home-outline" class="home_icon" [routerLink]="['/categories']"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="fashion-listing-content">
+  <ng-container>
+    <ion-row>
+      <ion-col style="text-align: center; font-weight: 600; margin-bottom: 10px; font-size: 15px; margin-top: -5px">
+          Product Catalogue
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="items-row">
+
+    
+      <ion-col size="6" class="listing-item">
+        <div class="item-image-wrapper">
+          <ion-row>
+            <ion-col style="text-align: center;padding-top: 15px;padding-bottom: 15px;font-size: 14px">
+              Air Conditioners
+            </ion-col>
+          </ion-row>
+          <a class="image-anchor" style="text-align: center; font-size: 5rem;">
+            <img class="categoryIcons" src="assets/icons/Air-Conditiner.png" />
+          </a>
+          <ion-row>
+            <ion-col style="padding: 5px;">
+              <ion-button size="small" style="margin: 5px; font-weight: 600;text-transform: capitalize;font-size: 12px;" expand="block" (click)="downloadPDF('Air Conditiner','https://pcatalogue.s3.ap-south-1.amazonaws.com/contact-us/RAD%20Brochure%202021%20-%20Digital%20Version.pdf')">Download Catalogue</ion-button>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+
+      <ion-col size="6" class="listing-item">
+        <div class="item-image-wrapper">
+          <ion-row>
+            <ion-col style="text-align: center;padding-top: 15px;padding-bottom: 15px;font-size: 14px">
+              Air Coolers
+            </ion-col>
+          </ion-row>
+          <a class="image-anchor" style="text-align: center; font-size: 5rem;">
+            <img class="categoryIcons" src="assets/icons/Air-Cooler.png" />
+          </a>
+          <ion-row>
+            <ion-col style="padding: 5px;">
+              <ion-button size="small" style="margin: 5px; font-weight: 600;text-transform: capitalize;font-size: 12px;" expand="block" (click)="downloadPDF('Air Cooler','https://pcatalogue.s3.ap-south-1.amazonaws.com/contact-us/Blue%20Star%20Air%20Cooler%20Leaflet.pdf')">Download Catalogue</ion-button>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+
+      <ion-col size="6" class="listing-item">
+        <div class="item-image-wrapper">
+          <ion-row>
+            <ion-col style="text-align: center;padding-top: 15px;padding-bottom: 15px;font-size: 14px">
+              Deep Freezers
+            </ion-col>
+          </ion-row>
+          <a class="image-anchor" style="text-align: center; font-size: 5rem;">
+            <img class="categoryIcons" src="assets/icons/Deep-Freezer.png" />
+          </a>
+          <ion-row>
+            <ion-col style="padding: 5px;">
+              <ion-button size="small" style="margin: 5px; font-weight: 600;text-transform: capitalize;font-size: 12px;" expand="block" (click)="downloadPDF('Deep Freezer','https://pcatalogue.s3.ap-south-1.amazonaws.com/contact-us/ProductCatalogue_DeepFreezer.pdf')">Download Catalogue</ion-button>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+
+      <ion-col size="6" class="listing-item">
+        <div class="item-image-wrapper">
+          <ion-row>
+            <ion-col style="text-align: center;padding-top: 15px;padding-bottom: 15px;font-size: 14px">
+              Water Purifiers
+            </ion-col>
+          </ion-row>
+          <a class="image-anchor" style="text-align: center; font-size: 5rem;">
+            <img class="categoryIcons" src="assets/icons/Water-Purifier.png" />
+          </a>
+          <ion-row>
+            <ion-col style="padding: 5px;">
+              <ion-button size="small" style="margin: 5px; font-weight: 600;text-transform: capitalize;font-size: 12px;" expand="block" (click)="downloadPDF('Water Purifier','https://pcatalogue.s3.ap-south-1.amazonaws.com/contact-us/6124_Range%20Flyer_34.76cm%20X%2025.4cm%20CTC.pdf')">Download Catalogue</ion-button>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+
+      <ion-col size="6" class="listing-item">
+        <div class="item-image-wrapper">
+          <ion-row>
+            <ion-col style="text-align: center;padding-top: 15px;padding-bottom: 15px;font-size: 14px">
+              Bottled Water Dispensers
+            </ion-col>
+          </ion-row>
+          <a class="image-anchor" style="text-align: center; font-size: 5rem;">
+            <img class="categoryIcons" src="assets/icons/Bottled-Water-Dis.png" />
+          </a>
+          <ion-row>
+            <ion-col style="padding: 5px;">
+              <ion-button size="small" style="margin: 5px; font-weight: 600;text-transform: capitalize;font-size: 12px;" expand="block" (click)="downloadPDF('Water Dispenser','https://pcatalogue.s3.ap-south-1.amazonaws.com/contact-us/ProductCatalogue_BottledWaterDispenser.pdf')">Download Catalogue</ion-button>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+
+      <ion-col size="6" class="listing-item">
+        <div class="item-image-wrapper">
+          <ion-row>
+            <ion-col style="text-align: center;padding-top: 15px;padding-bottom: 15px;font-size: 14px">
+              Air Purifiers
+            </ion-col>
+          </ion-row>
+          <a class="image-anchor" style="text-align: center; font-size: 5rem;">
+            <img class="categoryIcons" src="assets/icons/Air-Purifier.png" />
+          </a>
+          <ion-row>
+            <ion-col style="padding: 5px;">
+                <ion-button size="small" style="margin: 5px; font-weight: 600;text-transform: capitalize;font-size: 12px;" expand="block" (click)="downloadPDF('Air Purifier','https://pcatalogue.s3.ap-south-1.amazonaws.com/contact-us/Air%20Purifier.pdf')">Download Catalogue</ion-button>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+
+      <ion-col size="6" class="listing-item">
+        <div class="item-image-wrapper">
+          <ion-row>
+            <ion-col style="text-align: center;padding-top: 15px;padding-bottom: 15px;font-size: 14px">
+              Visi Coolers
+            </ion-col>
+          </ion-row>
+          <a class="image-anchor" style="text-align: center; font-size: 5rem;">
+            <img class="categoryIcons" src="assets/icons/Visi-Cooler.png" />
+          </a>
+          <ion-row>
+            <ion-col style="padding: 5px;">
+                <ion-button size="small" style="margin: 5px; font-weight: 600;text-transform: capitalize;font-size: 12px;" expand="block" (click)="downloadPDF('Visi Cooler','https://pcatalogue.s3.ap-south-1.amazonaws.com/contact-us/ProductCatalogue_VisiCooler.pdf')">Download Catalogue</ion-button>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+
+
+    </ion-row>
+    <div *ngIf="noRecords == 0">
+      <div style="font-size: 20px;text-align: center;margin-top: 50%">No product found</div>
+    </div>
+  </ng-container>
+</ion-content>

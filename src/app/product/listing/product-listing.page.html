@@ -1,0 +1,223 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-badge *ngIf="countNotification != 0" class="bedge-notification">{{countNotification}}</ion-badge>
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <img class="logo" src="assets/logo.png">
+    <ion-buttons slot="end">
+      <ion-icon name="search-outline" class="search_icon" (click)="onClickSearch(title)"></ion-icon>
+      <ion-icon name="heart-outline" class="heart_icon" (click)="onClickFavouritesIcon()"></ion-icon>
+      <ion-icon name="home-outline" class="home_icon" [routerLink]="['/categories']"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-down" pullingText="Pull to refresh" refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  
+  <div class="div-fixed">
+    <div style="overflow-x: auto; white-space: nowrap;border-top: 1px solid #09509d;">
+      <div class="tabCss" (click)="goToProductListPage('Air Conditioners')" [ngClass]="airConditionerFlage ? 'tabCssClick' : 'tabCss'">
+        <img class="categoryIcons" src="assets/categoryIcons/Air-Conditioner.png" />
+        Air <br/> Conditioners
+      </div>
+      <div class="tabCss" (click)="goToProductListPage('Air Coolers')" [ngClass]="airCoolerFlage ? 'tabCssClick' : 'tabCss'">
+        <img class="categoryIcons" src="assets/categoryIcons/Air-Cooler.png" />
+        Air <br/> Coolers
+      </div>
+      <div class="tabCss" (click)="goToProductListPage('Deep Freezer')" [ngClass]="deepFreezerFlage ? 'tabCssClick' : 'tabCss'">
+        <img class="categoryIcons" src="assets/categoryIcons/Deep-Freezer.png" />
+        Deep <br/> Freezers
+      </div>
+      <div class="tabCss" (click)="goToProductListPage('Water Purifiers')" [ngClass]="waterPurifierFlage ? 'tabCssClick' : 'tabCss'">
+        <img class="categoryIcons" src="assets/categoryIcons/Water-Purifier.png" />
+        Water <br/> Purifiers
+      </div>
+      <div class="tabCss" (click)="goToProductListPage('Bottled Water Dispenser')" [ngClass]="bottleWaterDispenserFlage ? 'tabCssClick' : 'tabCss'">
+        <img class="categoryIcons" src="assets/categoryIcons/Bottled-Water.png" />
+        Bottled Water <br/> Dispensers
+      </div>
+       <div class="tabCss" (click)="goToProductListPage('Air Purifiers')" [ngClass]="airPurifierFlage ? 'tabCssClick' : 'tabCss'">
+        <img class="categoryIcons" src="assets/categoryIcons/Air-Purifier.png" />
+        Air <br/> Purifiers
+      </div>
+      <div class="tabCss" (click)="goToProductListPage('Visi Cooler')" [ngClass]="visiCoolerFlage ? 'tabCssClick' : 'tabCss'">
+        <img class="categoryIcons" src="assets/categoryIcons/Visi-Cooler.png" />
+        Visi <br/> Coolers
+      </div>
+    </div>
+
+    <ion-row style="border-top: 1px solid #09509d;">
+      <ion-col size="5" class="subHeaderCSS" style="padding-right: 0px;">
+        <span *ngIf="total_product > 0">Total Products: {{total_product}}</span>
+      </ion-col>
+
+      <ion-col size="4" class="subHeaderCSS" (click)="goToCompare()" [ngClass]="compareFlage ? 'subHeaderCssClick' : 'subHeaderCSS'">
+        <ion-icon class="icon-compare" name="copy-outline"></ion-icon>
+        <span>Compare</span>
+      </ion-col>
+
+      <ion-col size="3" class="subHeaderCSS" (click)="openFilterModal()">
+        <ion-icon class="icon_funnel" name="funnel-outline"></ion-icon>
+        <div class="filter-bedge" *ngIf="flagShowFilter == true"></div>
+        <span>Filter</span>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div class="divMargin" [ngClass]="showBottomPopup ? 'divMarginClick' : 'divMargin'" style="margin-top: 150px;">
+    <div *ngFor="let item of product_listing" style="border-bottom: 1px solid #09509d;">
+
+      <div class="split" style="width: 100%;">
+
+        <div class="column image-center" style="position: relative;">
+
+          <a class="image-anchor">
+            <app-image-shell *ngIf="defolutImageFlage == false" class="item-image" animation="spinner" [src]="defolutImageFlage ? 'assets/default_product_image' : item.Image"
+              [alt]="'product image'">
+            </app-image-shell>
+            <img *ngIf="defolutImageFlage == true" class="item-image" src="assets/default_product_image.png">
+          </a>
+
+          <div *ngIf="compareFlage" class="compare-flage-align">
+            <div *ngIf="item.showCompareFlage == false" class="label-compare" (click)="getProductaddToCompare(item)">
+              Compare
+            </div>
+
+            <div *ngIf="item.showCompareFlage == true" class="label-added" (click)="getProductaddToCompare(item)">
+              <ion-icon name="checkmark" class="icon-checkmark"></ion-icon>Added
+            </div>
+          </div>
+        </div>
+
+        <div class="column" style="width: 70%;">
+          <div class="centered" (click)="clickOnProduct(item.ID,title, item.SKUCode, item.ProductTitle, item.Image)">
+            <p>{{item.SKUCode}}</p>
+            <p>{{item.ProductTitle}}</p>
+            <p *ngIf="(item.MRP != null && item.MRP != '') || (item.Price != null && item.Price != '')">
+              <!-- MRP (RS): {{item.MRP || item.Price | number}}</p> -->
+              <!-- MRP: &#x20B9;{{item.MRP || item.Price | number}}</p> -->
+              MRP: &#x20B9;{{formatNumber(item)}}</p>
+          </div>
+        </div>
+      </div>
+
+      <ion-row style="margin-bottom: 5px;">
+
+        <ion-col size="4" style="text-align: center;color: #09509d;" (click)="downloadPdf(item)">
+          <ion-icon name="download-outline" class="icon-download"></ion-icon>
+          <span>Download</span>
+        </ion-col>
+        <ion-col size="5" style="text-align: center;color: #09509d;" (click)="clickOnFavourites(item)">
+          <ion-icon *ngIf="item.favouritesFlage == false" name="heart-outline" class="icon-heart-black"></ion-icon>
+          <ion-icon *ngIf="item.favouritesFlage == true" name="heart" class="icon-heart-red"></ion-icon>
+          <span>My Products</span>
+        </ion-col>
+        <ion-col size="3" style="text-align: center;color: #09509d;padding-top: 3px;" (click)="getPdfLink(item.ID,item)">
+          <img class="icon-share" src="assets/share.png">
+          <span>Share</span>
+        </ion-col>
+      </ion-row>
+
+
+    </div>
+    <div *ngIf="!emptyListFlage">
+      <div style="font-size: 20px;text-align: center;margin-top: 50%">No product found</div>
+    </div>
+  </div>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more products...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <!-- show Bottom Popup start -->
+  <div *ngIf="showBottomPopup" class="div-footer">
+
+    <div *ngIf="popupCompareList.length != 0">
+
+        <ion-row class="row-border-top">
+          <ion-col size="4" style="text-align: center;" *ngFor="let item of popupCompareList">
+            <div>
+              <ion-icon name="close-circle" class="icon-remove" (click)="removeProductFromCompareList(item.ID)"></ion-icon>
+              <img style="height: 60px;" [src]="item.Image">
+            </div>
+            <div class="product-title">{{item.SKUCode}}</div>
+
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="row-border-top">
+          <ion-col style="text-align: center;" (click)="onClickCompareNow()">
+            <P class="btn-compare">Compare Now</P>
+          </ion-col>
+        </ion-row>
+    </div>
+
+  </div>
+  <!-- show Bottom Popup end -->
+
+
+   <!-- show Compare Popup start -->
+   <ion-row *ngIf="showComparePopup" class="row-popup-Compare">
+    <ion-col size="12" class="col-background">
+      <div style="display: flex;">
+
+        <div *ngIf="!flagSameCategory" style="width:90%" class="title-popup-compare">Remove at least one product to proceed. You can compare up to 3 product at time</div>
+        <div *ngIf="flagSameCategory" style="width:90%" class="title-popup-compare">Please add the product of the same category for comparison</div>
+        <!-- <div style="width:90%" class="title-popup-compare">Remove at least one product to proceed. You can compare up to 3 product at time</div> -->
+        <div style="width:10%">
+          <ion-icon (click)="closeComparePopup()" name="close-outline" class="close_icon"></ion-icon>
+        </div>
+      </div>
+    </ion-col>
+
+    <ion-col size="12" class="compare-popup-padding">
+     
+
+      <div class="split-2" style="display: flex;" *ngFor="let item of popupCompareList">
+
+        <div class="column-2" style="width: 20%;">
+
+            <div class="col-checkbox">
+              <ion-checkbox (click)="AddIds(item.ID)"></ion-checkbox>
+            </div>
+          </div>
+
+        <div class="column-2" style="width: 30%;">
+          <div>
+              <app-image-shell style="width: 100%; height: 100%;" animation="spinner" [src]="item.Image">
+                </app-image-shell>
+          </div>
+        </div>
+  
+        <div class="column-2" style="width: 70%;">
+          <div class="centered-2" >
+              <p style="margin-bottom: 5px;">{{item.SKUCode}}</p>
+              <p style="margin-top: 5px;">{{item.ProductTitle}}</p>
+          </div>
+        </div>
+  
+      </div>
+
+      <ion-row *ngIf="this.popupCompareList.length != 0" class="row-btn">
+        <ion-col size="12">
+         <ion-button class="select-variant-btn" (click)="removeProductFromComparePopup()" expand="block">Remove</ion-button>
+       </ion-col>
+     </ion-row> 
+
+     <div *ngIf="this.popupCompareList.length == 0">
+      <div class="text-msg-2">Please go to any product and tap on the "add to compare" button for it to be shown here.</div>
+    </div>
+
+    </ion-col>
+    
+  </ion-row>
+    <!-- show Compare Popup end -->
+
+</ion-content>

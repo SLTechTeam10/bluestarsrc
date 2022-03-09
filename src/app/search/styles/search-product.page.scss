@@ -1,0 +1,262 @@
+// Custom variables
+// Note:  These ones were added by us and have nothing to do with Ionic CSS Custom Properties
+:host {
+  --page-margin: var(--app-fair-margin);
+  --page-background: var(--app-background);
+
+  --page-items-gutter: calc(var(--page-margin) / 2);
+  --page-color: #cb328f;
+}
+
+// Note:  All the CSS variables defined below are overrides of Ionic elements CSS Custom Properties
+.fashion-listing-content {
+  --background: var(--page-background);
+  --padding-start: var(--page-margin);
+  --padding-end: var(--page-margin);
+  --padding-top: var(--page-margin);
+  --padding-bottom: var(--page-margin);
+}
+
+.items-row {
+  --ion-grid-column-padding: 0;
+
+  .listing-item {
+    margin-bottom: calc(var(--page-margin) * 1);
+
+    &:nth-child(odd) {
+      padding-right: var(--page-items-gutter);
+    }
+
+    &:nth-child(even) {
+      padding-left: var(--page-items-gutter);
+    }
+
+    .item-image-wrapper {
+      // border: 1px solid var(--ion-color-light-shade);
+      border: 1px solid #09509d;
+      .image-anchor {
+        display: block;
+      }
+    }
+
+    .item-body {
+      --ion-grid-column-padding: 0px;
+
+      padding: 5px 5px 0px;
+      text-align: center;
+      min-height: 68px;
+      .main-info {
+        margin-bottom: calc(var(--page-margin) / 2);
+
+        .item-name {
+          margin: 0px;
+          font-size: 13px;
+          font-weight: 400;
+
+          text-overflow: ellipsis;
+          // white-space: nowrap;
+          white-space: unset;
+          overflow: hidden;
+
+          .name-anchor {
+            color: var(--ion-color-primary);
+            display: block;
+            text-decoration: none;
+          }
+        }
+      }
+
+      .secondary-info {
+        align-items: center;
+
+        .price-col {
+          padding-bottom: 5px;
+          &:first-child {
+            padding-right: calc(var(--page-margin) / 2);
+            text-align: right;
+
+            &:last-child {
+              text-align: center;
+            }
+          }
+
+          &:last-child {
+            padding-left: calc(var(--page-margin) / 2);
+            text-align: left;
+          }
+        }
+
+        .separator {
+          max-width: 0px;
+          border-right: solid 2px var(--ion-color-light-shade);
+          align-self: stretch;
+        }
+
+        .item-sale-price {
+          display: block;
+          font-weight: 400;
+          // color: var(--page-color);
+          // font-size: 16px;
+          font-size: 14px;
+          // color: grey;
+          // min-height: 30px;
+        }
+
+        .item-original-price {
+          display: block;
+          text-decoration: line-through;
+          color: var(--ion-color-medium-shade);
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+ion-header ion-toolbar:first-of-type{
+  text-align: center;
+}
+.logo{
+  // width: 55%;
+  width: 70%;
+  margin-top: 5px;
+}
+.home_icon{
+  font-size: 25px;
+  margin-right: 5px;
+}
+.heart_icon{
+  font-size: 28px;
+  margin-right: 10px;
+}
+// .copy_icon{
+//   font-size: 25px;
+//   margin-right: 5px;
+//   // color: white;
+// }
+.icon-heart-red{
+  // float: right;
+  // padding-right: 10px;
+  // padding-top: 5px;
+  // font-size: 25px;
+  // color: #09509d;
+  font-size: 25px;
+  margin-bottom: -8px;
+  padding-right: 3px;
+}
+.icon-heart-black{
+  // float: right;
+  // padding-right: 10px;
+  // padding-top: 5px;
+  // font-size: 25px;
+  // color: #09509d;
+
+  font-size: 25px;
+  margin-bottom: -8px;
+  padding-right: 3px;
+}
+// .icon-share{
+//   float: right;
+//   padding-top: 5px;
+//   font-size: 25px;
+//   color: #09509d;
+//   padding-right: 10px;
+// }
+.icon-share{
+  // float: right;
+  // padding-top: 2px;
+  // color: #09509d;
+  // padding-right: 10px;
+  // width: 12%
+  width: 29px;
+  margin-bottom: -7px;
+  padding-right: 3px;
+}
+.icon-download{
+  // float: right;
+  // padding-top: 5px;
+  // font-size: 25px;
+  // color: #09509d;
+  // padding-right: 10px;
+  font-size: 22px;
+  margin-bottom: -4px;
+  padding-right: 3px;
+}
+.col-padding{
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  padding-bottom: 7px !important;
+  // padding-top: 10px !important;
+  // border-top: 1px solid #09509d;
+  // border-bottom: 1px solid #09509d;
+  // margin-bottom: 5px;
+  // margin-top: -10px;
+}
+.main-title{
+  // font-size: 17px;
+  color: #09509d;
+  font-weight: bold;
+}
+.icon_funnel{
+  float: right;
+  font-size: 1.5em;
+  color: #09509d;
+  // padding-right: 10px;
+}
+
+.product-text{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+ }
+
+
+ // *********************
+/* Split the screen in half */
+.split {
+  height: 25%;
+  width: 100%;
+  z-index: 1;
+  position: relative;
+  // top: 0;
+  overflow-x: hidden;
+  // padding-top: 20px;
+  // border-bottom: 1px solid #eae4e4;
+  // border-bottom: 1px solid #09509d;
+  // border-top: 1px solid #9E9E9E;
+}
+
+/* Control the left side */
+
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  // width: 33.33%;
+  padding: 10px;
+  height: 100%; /* Should be removed. Only for demonstration */
+  // border: 1px solid;
+}
+
+.centered {
+  // position: absolute;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
+  // text-align: center;
+  color: balck;
+}
+.icon-delete{
+  position: absolute; 
+  top: 50%; 
+  left: 90%; 
+  transform: translate(-50%, -50%);
+  font-size: 25px;
+  color: #09509d;
+}
+
+.div-fixed{
+  position: fixed;
+  z-index: 999;
+  background-color: white;
+  width: 100%;
+  overflow-y: auto;
+}

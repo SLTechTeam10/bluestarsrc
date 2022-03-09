@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <span class="popup-title"> Please add the product of the same category for comparison </span>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-icon style="font-size: 33px;" class="icon_close" (click)="closeModal()" name="close-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="split" style="display: flex;" *ngFor="let item of product_listing">
+    <div class="column" style="width: 20%;">
+      <div class="col-checkbox">
+        <ion-checkbox (click)="AddIds(item.ID)"></ion-checkbox>
+      </div>
+    </div>
+
+    <div class="column" style="width: 30%;">
+      <div>
+        <app-image-shell style="width: 100%; height: 100%;" animation="spinner" [src]="item.Image">
+        </app-image-shell>
+      </div>
+    </div>
+
+    <div class="column" style="width: 70%;">
+      <div class="centered">
+        <p style="margin-bottom: 5px;">{{item.SKUCode}}</p>
+        <p style="margin-top: 5px;">{{item.ProductTitle}}</p>
+      </div>
+    </div>
+  </div>
+
+  <ion-row *ngIf="noRecords != 0" class="row-btn">
+    <ion-col size="12">
+      <ion-button class="select-variant-btn" (click)="removeProductFromCompareList()" expand="block">Remove</ion-button>
+    </ion-col>
+  </ion-row>
+
+  <div *ngIf="noRecords == 0">
+    <div class="text-msg">Please go to any product and tap on the "add to compare" button for it to be shown here.</div>
+  </div>
+
+</ion-content>

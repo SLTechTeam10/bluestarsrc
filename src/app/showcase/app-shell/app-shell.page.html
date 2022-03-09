@@ -1,0 +1,473 @@
+<ion-header>
+  <ion-toolbar color="lightest">
+    <ion-buttons slot="start">
+      <span style="font-size: 18px; font-weight: bold; padding-left: 15px; color: #09509d;">FILTER</span>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-icon style="font-size: 33px;" class="icon_close" (click)="closeModal()" name="close-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="showcase-content">
+  <!-- <ion-row style="border-bottom: 1px solid gray;">
+    <ion-col class="main-title">
+      <span>Filter</span>
+      <ion-icon class="icon_close" (click)="closeModal()" name="close-outline"></ion-icon>
+    </ion-col>
+  </ion-row> -->
+
+  <div *ngIf="title=='Air Conditioners'" class="row">
+    <div class="col">
+      <div class="tabs">
+        <div class="tab">
+          <input type="checkbox" id="chck1">
+          <label class="tab-label" for="chck1">Sub Category 
+            <ion-badge *ngIf="airConditionerSubCategorySelectedLenght != 0" class="bedge-align" color="primary">{{airConditionerSubCategorySelectedLenght}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of airConditionerSubCategory">
+              <ion-item (click)="clickOnAirConditionerSubCategory(item.value)">
+                <ion-label>{{item.value}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}">
+                </ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+        <div class="tab">
+          <input type="checkbox" id="chck2">
+          <label class="tab-label" for="chck2">Capacity (TR)
+            <ion-badge *ngIf="airConditionerCapacitySelectedLength != 0" class="bedge-align" color="primary">{{airConditionerCapacitySelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of airConditionerCapacity">
+              <ion-item (click)="clickOnAirConditionerCapacity(item.value)">
+                <ion-label>{{item.value}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}">
+                </ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+        <div class="tab">
+          <input type="checkbox" id="chck3">
+          <label class="tab-label" for="chck3">Series
+            <ion-badge *ngIf="airConditionerSeriesSelectedLength != 0" class="bedge-align" color="primary">{{airConditionerSeriesSelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of airConditionerSeries">
+              <ion-item (click)="clickOnAirConditionerSeries(item.value)">
+                <ion-label>{{item.showValue}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+        <div class="tab">
+          <input type="checkbox" id="chck4">
+          <label class="tab-label" for="chck4">Star Rating
+            <ion-badge *ngIf="airConditionerStarRatingSelectedLength != 0" class="bedge-align" color="primary">{{airConditionerStarRatingSelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of airConditionerStarRating">
+              <ion-item (click)="clickOnAirConditionerStarRating(item.value)">
+                <ion-label>{{item.showValue}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}">
+                </ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+        <div class="tab">
+          <input type="checkbox" id="chck5">
+          <label class="tab-label" for="chck5">MRP (&#x20B9;)
+            <ion-badge *ngIf="airConditionerPriseSelectedLength != 0" class="bedge-align" color="primary">{{airConditionerPriseSelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of airConditionerMRP">
+              <ion-item (click)="clickOnAirConditionerPrise(item.value)">
+                <ion-label>{{item.showValue}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="title=='Air Coolers'" class="row">
+    <div class="col">
+      <div class="tabs">
+        <div class="tab">
+          <input type="checkbox" id="chck1">
+          <label class="tab-label" for="chck1">Type
+            <ion-badge *ngIf="airCoolerTypeSelectedLength != 0" class="bedge-align" color="primary">{{airCoolerTypeSelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of airCoolerType">
+              <ion-item (click)="clickOnAirCoolerType(item.value)">
+                <ion-label>{{item.value}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+        <div class="tab">
+          <input type="checkbox" id="chck2">
+          <label class="tab-label" for="chck2">MRP (&#x20B9;) 
+            <ion-badge *ngIf="airCoolerPriceSelectedLength != 0"  class="bedge-align" color="primary">{{airCoolerPriceSelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of airCoolerMRP">
+              <ion-item (click)="clickOnAirCoolerPrice(item.value)">
+                <ion-label>{{item.showValue}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+        <div class="tab">
+          <input type="checkbox" id="chck3">
+          <label class="tab-label" for="chck3">Capacity (Ltr) 
+            <ion-badge *ngIf="airCoolerCapacitySelectedLength != 0" class="bedge-align" color="primary">{{airCoolerCapacitySelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of airCoolerCapacity">
+              <ion-item (click)="clickOnAirCoolerCapacity(item.value)">
+                <ion-label>{{item.value}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="title=='Air Purifiers'" class="row">
+    <div class="col">
+      <div class="tabs">
+        <div class="tab">
+          <input type="checkbox" id="chck1">
+          <label class="tab-label" for="chck1">MRP (&#x20B9;) 
+            <ion-badge *ngIf="airPurifierPriceSelectedLength != 0" class="bedge-align" color="primary">{{airPurifierPriceSelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of airPurifierMRP">
+              <ion-item (click)="clickOnAirPurifierPrice(item.value)">
+                <ion-label>{{item.showValue}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+        <div class="tab">
+          <input type="checkbox" id="chck2">
+          <label class="tab-label" for="chck2">Coverage Area (sqft)
+            <ion-badge *ngIf="airPurifierCoverageAreaSelectedLength != 0" class="bedge-align" color="primary">{{airPurifierCoverageAreaSelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of airPurifierCoverageArea">
+              <ion-item (click)="clickOnAirPurifierCoverageArea(item.value)">
+                <ion-label>{{item.value}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+        <div class="tab">
+          <input type="checkbox" id="chck3">
+          <label class="tab-label" for="chck3">CADR
+            <ion-badge *ngIf="airPurifierCADRSelectedLength != 0" class="bedge-align" color="primary">{{airPurifierCADRSelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of airPurifierCADR">
+              <ion-item (click)="clockOnAirPurifierCADR(item.value)">
+                <ion-label>{{item.value}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="title=='Water Purifiers'" class="row">
+    <div class="col">
+      <div class="tabs">
+        <div class="tab">
+          <input type="checkbox" id="chck1">
+          <label class="tab-label" for="chck1">Technology
+            <ion-badge *ngIf="waterPurifierTechnologySelectedLength != 0" class="bedge-align" color="primary">{{waterPurifierTechnologySelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of waterPurifieTechnology">
+              <ion-item (click)="clickOnWaterPurifierTechnology(item.value)">
+                <ion-label>{{item.value}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+        <div class="tab">
+          <input type="checkbox" id="chck2">
+          <label class="tab-label" for="chck2">MRP (&#x20B9;)
+            <ion-badge *ngIf="waterPurifierPriseSelectedLength != 0" class="bedge-align" color="primary">{{waterPurifierPriseSelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of waterPurifieMRP">
+              <ion-item (click)="clickOnWaterPurifierPrice(item.value)">
+                <ion-label>{{item.showValue}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+        <div class="tab">
+          <input type="checkbox" id="chck3">
+          <label class="tab-label" for="chck3">Capacity (Ltr)
+            <ion-badge *ngIf="waterPurifierCapacitySelectedLength != 0" class="bedge-align" color="primary">{{waterPurifierCapacitySelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of waterPurifieCapacity">
+              <ion-item (click)="clickOnWaterPurifierCapacity(item.value)">
+                <ion-label>{{item.value}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+        <div class="tab">
+          <input type="checkbox" id="chck4">
+          <label class="tab-label" for="chck4">Model Name
+            <ion-badge *ngIf="waterPurifierModelNameSelectedLength != 0" class="bedge-align" color="primary">{{waterPurifierModelNameSelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of waterPurifieModelName">
+              <ion-item (click)="clickOnWaterPurifierModelName(item.value)">
+                <ion-label>{{item.value}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div *ngIf="title=='Deep Freezer'" class="row">
+    <div class="col">
+      <div class="tabs">
+        <div class="tab">
+          <input type="checkbox" id="chck1">
+          <label class="tab-label" for="chck1">Sub Category
+            <ion-badge *ngIf="deepFreezerCategorySelectedLength != 0" class="bedge-align" color="primary">{{deepFreezerCategorySelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of deepFreezerCategory">
+              <ion-item (click)="clickOnDeepFreezerCategory(item.value)">
+                <ion-label>{{item.value}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+        <div class="tab">
+          <input type="checkbox" id="chck2">
+          <label class="tab-label" for="chck2">Capacity (Ltr)
+            <ion-badge *ngIf="deepFreezerCapacitySelectedLength != 0" class="bedge-align" color="primary">{{deepFreezerCapacitySelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of deepFreezerCapacity">
+              <ion-item (click)="clickOnDeepFreezerCapacity(item.value)">
+                <ion-label>{{item.value}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+        <div class="tab">
+          <input type="checkbox" id="chck3">
+          <label class="tab-label" for="chck3">Doors
+            <ion-badge *ngIf="deepFreezerDoorsSelectedLength != 0" class="bedge-align" color="primary">{{deepFreezerDoorsSelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of deepFreezerDoors">
+              <ion-item (click)="clickOnDeepFreezerDoors(item.value)">
+                <ion-label>{{item.value}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+        <div class="tab">
+          <input type="checkbox" id="chck4">
+          <label class="tab-label" for="chck4">Refrigerant
+            <ion-badge *ngIf="deepFreezerRefrigerantSelectedLength != 0" class="bedge-align" color="primary">{{deepFreezerRefrigerantSelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of deepFreezerRefrigerant">
+              <ion-item (click)="clickOnDeepFreezerRefrigerant(item.value)">
+                <ion-label>{{item.value}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+
+
+  <div *ngIf="title=='Bottled Water Dispenser'" class="row">
+    <div class="col">
+      <div class="tabs">
+         <div class="tab">
+          <input type="checkbox" id="chck1">
+          <label class="tab-label" for="chck1">Series
+            <ion-badge *ngIf="waterDispenserSeriesSelectedLength != 0" class="bedge-align" color="primary">{{waterDispenserSeriesSelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of waterDispenserSeries">
+              <ion-item (click)="clickOnBottledWaterDispenserSeries(item.value)">
+                <ion-label>{{item.value}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+        <div class="tab">
+          <input type="checkbox" id="chck2">
+          <label class="tab-label" for="chck2">Colour
+            <ion-badge *ngIf="waterDispenserColourSelectedLength != 0" class="bedge-align" color="primary">{{waterDispenserColourSelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of waterDispenserColour">
+              <ion-item (click)="clickOnBottledWaterDispenserColour(item.value)">
+                <ion-label>{{item.value}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+        <div class="tab">
+          <input type="checkbox" id="chck3">
+          <label class="tab-label" for="chck3">Faucets
+            <ion-badge *ngIf="waterDispenserFaucetsSelectedLength != 0" class="bedge-align" color="primary">{{waterDispenserFaucetsSelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of waterDispenserFaucets">
+              <ion-item (click)="clickOnBottledWaterDispenserFaucets(item.value)">
+                <ion-label>{{item.value}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+
+
+
+   <div *ngIf="title=='Visi Cooler'" class="row">
+    <div class="col">
+      <div class="tabs">
+        <div class="tab">
+          <input type="checkbox" id="chck1">
+          <label class="tab-label" for="chck1">Series
+            <ion-badge *ngIf="visiCoolerSeriesSelectedLength != 0" class="bedge-align" color="primary">{{visiCoolerSeriesSelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of visiCoolerSeries">
+              <ion-item (click)="clickOnVisiCoolerSeries(item.value)">
+                <ion-label>{{item.value}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+        <div class="tab">
+          <input type="checkbox" id="chck2">
+          <label class="tab-label" for="chck2">Capacity (Ltr)
+            <ion-badge *ngIf="visiCoolerCapacitySelectedLength != 0" class="bedge-align" color="primary">{{visiCoolerCapacitySelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of visiCoolerCapacity">
+              <ion-item (click)="clickOnVisiCoolerCapacity(item.value)">
+                <ion-label>{{item.value}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+        <div class="tab">
+          <input type="checkbox" id="chck3">
+          <label class="tab-label" for="chck3">Doors
+            <ion-badge *ngIf="visiCoolerDoorsSelectedLength != 0" class="bedge-align" color="primary">{{visiCoolerDoorsSelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of visiCoolerDoors">
+              <ion-item (click)="clickOnVisiCoolerDoors(item.value)">
+                <ion-label>{{item.value}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+        <div class="tab">
+          <input type="checkbox" id="chck4">
+          <label class="tab-label" for="chck4">Cooling Type
+            <ion-badge *ngIf="visiCoolerCoolingTypeSelectedLength != 0" class="bedge-align" color="primary">{{visiCoolerCoolingTypeSelectedLength}}</ion-badge>
+          </label>
+          <div class="tab-content">
+            <ion-list *ngFor="let item of visiCoolerCoolingType">
+              <ion-item (click)="clickOnVisiCoolerCoolingType(item.value)">
+                <ion-label>{{item.value}}</ion-label>
+                <ion-checkbox checked="{{item.flage}}"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+
+      
+       
+      </div>
+    </div>
+  </div>
+
+  <!-- <ion-row class="details-purchase-options-row" style="margin-top: 10px;">
+    <ion-col size="6">
+      <ion-button class="select-variant-btn" style="font-weight: 600;" expand="block" (click)="onClickApply()">Apply
+      </ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button class="select-variant-btn" style="font-weight: 600;color: black;" expand="block" fill="outline"
+        (click)="clearFilter()">Clear
+      </ion-button>
+    </ion-col>
+  </ion-row> -->
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-row class="details-purchase-options-row" style="margin-top: 10px;">
+      <ion-col size="6">
+        <ion-button class="select-variant-btn" style="font-weight: 600;" expand="block" (click)="onClickApply()">Apply
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button class="select-variant-btn" style="font-weight: 600;color: black;" expand="block" fill="outline"
+          (click)="clearFilter()">Clear
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

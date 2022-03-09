@@ -1,0 +1,55 @@
+ion-title {
+  font-weight: 400;
+  letter-spacing: 0.4px;
+}
+
+.my-modal {
+  height: 80%;
+  width: 95% !important;
+  margin: 0 auto;
+  top: 70px;
+  border: 1px solid;
+  .modal-wrapper {
+  // height: 90%!important;
+  // width: 95%!important;
+  }
+} 
+
+.my-modal-listing {
+  .modal-wrapper {
+    height: 40%!important;
+    position: absolute;
+    bottom: 0px;
+  } 
+}
+
+.notification-alert{
+  .alert-head.sc-ion-alert-md {
+    // background-color: white !important;
+  }
+  .alert-title.sc-ion-alert-md{
+    // color: #06366b !important;
+    // border-bottom: 1px solid #9E9E9E !important;
+    // padding-bottom: 5px !important;
+    color: white;
+    text-align: center;
+  }
+  .alert-sub-title.sc-ion-alert-md{
+    // padding-top: 10px !important;
+    // font-weight: 600 !important;
+  }
+  .alert-button.sc-ion-alert-md{
+    // margin-left: 20px !important;
+    // margin-right: 20px !important;
+    // font-weight: 600 !important;
+
+    background-color: #05356a !important;
+    color: #fffffe !important;
+    margin: 0 auto;
+  }
+
+  .alert-message.sc-ion-alert-md{
+    text-align: center;
+    padding: 10px 5px 10px 5px !important;
+  }
+}

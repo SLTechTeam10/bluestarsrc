@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <img class="logo" src="assets/logo.png">
+    <ion-buttons slot="end">
+      <ion-icon name="heart-outline" class="heart_icon" [routerLink]="['/favourites']"></ion-icon>
+      <ion-icon name="home-outline" class="home_icon" [routerLink]="['/categories']"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- <div class="div-fixed">
+  <ion-row>
+    <ion-col class="col-padding">
+      <span class="main-title">Notifications</span>
+    </ion-col>
+  </ion-row>
+  </div> -->
+  <!-- <ng-container *ngIf="notification_details">
+  <div style="border-bottom: 1px solid #09509d;">
+    <div class="split">
+      <div class="column" style="width: 100%;">
+        <div class="centered">
+          <p>Dear Team</p>
+          <p>{{notification_details.ShortDescription}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </ng-container> -->
+  <ng-container *ngIf="notification_details">
+  <div>
+    <div class="split">
+      <div class="column" style="width: 100%;">
+        <div class="centered">
+          <p style="font-weight: 600;font-size: 18px;">{{notification_details.Title}}</p>
+          <p style="font-size: 18px;">{{notification_details.ShortDescription}}</p>
+          <!-- <p>Description:</p> -->
+          <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(notification_details.LongDescription)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div style="margin: 5px;">
+    <video controls preload style="width: 100%;">
+      <source src="assets/movie.mp4" type="video/mp4">
+    </video>
+  </div> -->
+
+  <!-- <ion-row>
+    <ion-col>
+      <p style="margin-bottom: 8px;">PDF Link:</p>
+      <p style="margin-top: 0px;color: #09509d;" (click)="openPDFLink('https://damuat.iksulalive.com/sites/default/files/air_cooler/Academic%20Cv%20Template_2.pdf')">https://damuat.iksulalive.com/sites/default/files/air_cooler/Academic%20Cv%20Template_2.pdf</p>
+    </ion-col>
+  </ion-row> -->
+  <!-- <div class="container">
+    <iframe frameborder="0" src="https://www.youtube.com/embed/hoNb6HuNmU0?autohide=1&amp;controls=1&amp;showinfo=0"></iframe>
+  </div> -->
+  </ng-container>
+ 
+</ion-content>

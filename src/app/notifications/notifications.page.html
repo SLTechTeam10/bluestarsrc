@@ -1,0 +1,130 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <img class="logo" src="assets/logo.png">
+    <ion-buttons slot="end">
+      <ion-icon name="heart-outline" class="heart_icon" [routerLink]="['/favourites']"></ion-icon>
+      <ion-icon name="home-outline" class="home_icon" [routerLink]="['/categories']"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <div class="div-fixed">
+    <!-- <ion-row>
+      <ion-col class="col-padding"> -->
+        <div style="display: inline-flex;padding-top: 5px;padding-bottom: 5px;">Notifications</div>
+        <ion-icon class="icon_refresh" name="refresh-outline" (click)="refreshNotificationList()"></ion-icon>
+      <!-- </ion-col>
+    </ion-row> -->
+  </div>
+</ion-header>
+
+<ion-content>
+
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-down" pullingText="Pull to refresh" refreshingSpinner="circles"
+          refreshingText="Refreshing...">
+        </ion-refresher-content>
+      </ion-refresher>
+
+  <!-- <div class="div-fixed">
+        <div style="display: inline-flex;padding-top: 5px;">Notifications</div>
+        <ion-icon class="icon_refresh" name="refresh-outline" (click)="refreshNotificationList()"></ion-icon>
+  </div> -->
+
+  <div>
+    <ng-container *ngFor="let item of notification_listing">
+      <ion-row class="row-paddding" *ngIf="item.status == 'read'" (click)="showNotificationsViewPage(item.ID)">
+       <ion-col size="10">
+         <span style="font-weight: 600;color: #9E9E9E;">{{item.Title}}</span>
+       </ion-col>
+       <ion-col size="2"></ion-col>
+       <!-- <ion-col size="4" style="text-align: right;">
+         <span>{{item.Date}}</span>
+       </ion-col> -->
+       <ion-col size="10">
+         <span style="font-weight: 600;color: #9E9E9E;">{{item.ShortDescription}}</span>
+       </ion-col>
+       <ion-col size="2" style="text-align: right;">
+         <div class="flage-unread" *ngIf="item.status != 'read'"></div>
+         <img style="width: 20px;" src="assets/arrows.png">
+       </ion-col>
+       <ion-col size="10">
+        <span style="font-weight: 600;color: #9E9E9E;">{{item.Date}}</span>
+      </ion-col> 
+     </ion-row>
+
+     <ion-row class="row-paddding" *ngIf="item.status != 'read'" (click)="showNotificationsViewPage(item.ID)">
+      <ion-col size="10">
+        <span style="font-weight: 600;">{{item.Title}}</span>
+      </ion-col>
+      <ion-col size="2"></ion-col>
+      <ion-col size="10">
+        <span style="font-weight: 600;color: #9E9E9E;">{{item.ShortDescription}}</span>
+      </ion-col>
+      <ion-col size="2" style="text-align: right;">
+        <!-- <div class="flage-unread" *ngIf="item.status != 'read'"></div> -->
+        <img style="width: 20px;" src="assets/arrows.png">
+      </ion-col>
+      <ion-col size="10">
+       <span style="font-weight: 600;color: #9E9E9E;">{{item.Date}}</span>
+     </ion-col> 
+    </ion-row>
+
+     <!-- <ion-row class="row-paddding" style="background-color: #d9e4f1" *ngIf="item.status != 'read'" (click)="showNotificationsViewPage(item.ID)">
+      <ion-col size="8">
+        <span style="font-weight: 600;">{{item.Title}}</span>
+      </ion-col>
+      <ion-col size="4" style="text-align: right;">
+        <span>{{item.Date}}</span>
+      </ion-col>
+      <ion-col size="10">
+        <span style="color: #9E9E9E;">{{item.ShortDescription}}</span>
+      </ion-col>
+      <ion-col size="2" style="text-align: right;">
+        <img style="width: 20px;" src="assets/arrows.png">
+      </ion-col>
+    </ion-row> -->
+    </ng-container>
+
+    <div *ngIf="countNotification == 0">
+      <div style="text-align: center;margin-top: 20%;">No notification here</div>
+    </div>
+  </div>
+
+  <!-- <div style="margin-top: 40px;">
+    <ion-row style="border-bottom: 1px solid #09509d;padding-left: 5px;padding-right: 5px;" *ngFor="let item of notification_listing"
+      (click)="showNotificationsViewPage(item.ID)">
+      <ion-col size="10">
+        <p style="font-weight: 600;">{{item.Title}}</p>
+        <p style="color: #9E9E9E;">{{item.ShortDescription}}</p>
+        <p>{{item.Date}}</p>
+      </ion-col>
+      <ion-col size="2" style="position: relative;text-align: center;">
+        <div class="filter-bedge" *ngIf="item.status != 'read'"></div>
+        <img style="position: absolute; width: 30px;top: 40%;" src="assets/arrows.png">
+      </ion-col>
+    </ion-row>
+  </div> -->
+
+  <!-- <div class="filter-bedge" *ngIf="flagShowFilter == true"></div> -->
+  <!-- <div style="margin-top: 30px;">
+    <div style="border-bottom: 1px solid #09509d;" *ngFor="let item of notification_listing" (click)="showNotificationsViewPage()">
+      <div class="split">
+        <div class="column" style="width: 80%;">
+          <div class="centered">
+            <p style="font-weight: 600;">{{item.Title}}</p>
+            <p style="color: #9E9E9E;">{{item.ShortDescription}}</p>
+            <p>{{item.Date}}</p>
+          </div>
+          <div class="column" style="width: 20%;">
+          <div class="icon-delete-col">
+            <img src="assets/arrows.png">
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</ion-content>

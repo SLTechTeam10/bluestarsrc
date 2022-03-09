@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="app/categories"></ion-back-button>
+    </ion-buttons>
+    <img class="logo" src="assets/logo.png">
+    <!-- <ion-title>Search</ion-title> -->
+    <ion-buttons slot="end">
+      <ion-icon name="heart-outline" class="heart_icon" [routerLink]="['/favourites']"></ion-icon>
+      <ion-icon name="home-outline" class="home_icon" [routerLink]="['/categories']"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="div-fixed">
+  <ion-row>
+    <ion-col>
+      <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="onChange(searchTerm,$event)">
+      </ion-searchbar>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="product_listing.length > 0" style="border-bottom: 1px solid #09509d;">
+    <ion-col class="col-padding">
+      <span class="main-title">Total Products : {{total_product}}</span>
+    </ion-col>
+  </ion-row>
+    </div>
+
+  <div style="margin-top: 75px;">
+
+  <div *ngFor="let item of product_listing" style="border-bottom: 1px solid #09509d;">
+    <!-- <div>
+          <img class="icon-share" src="assets/share.png" (click)="showSharePopover($event, item, title)">
+          <ion-icon name="download-outline" class="icon-download" (click)="downloadPdf(item)"></ion-icon>
+          <ion-icon *ngIf="item.favouritesFlage == false" name="heart-outline" class="icon-heart-black" (click)="clickOnFavourites(item)"></ion-icon>
+          <ion-icon *ngIf="item.favouritesFlage == true" name="heart" class="icon-heart-red" (click)="clickOnFavourites(item)"></ion-icon>
+      </div> -->
+    <!-- <div *ngIf="item.favouritesFlage == false">
+            <ion-icon name="heart-outline" class="icon-heart-black" (click)="clickOnFavourites(item)"></ion-icon>
+          </div>
+          <div *ngIf="item.favouritesFlage == true">
+            <ion-icon name="heart" class="icon-heart-red" (click)="clickOnFavourites(item)"></ion-icon>
+          </div> -->
+    <div class="split">
+
+      <div class="column" style="width: 30%;">
+        <div>
+          <a class="image-anchor">
+            <app-image-shell class="item-image" animation="spinner" [src]="item.Image" [alt]="'product image'">
+            </app-image-shell>
+          </a>
+        </div>
+      </div>
+
+      <div class="column" style="width: 70%;">
+        <div class="centered" (click)="clickOnProduct(item.ID,title, item.SKUCode, item.ProductTitle, item.Image)">
+          <p>{{item.SKUCode}}</p>
+          <p>{{item.ProductTitle}}</p>
+          <p *ngIf="(item.MRP != null && item.MRP != '') || (item.Price != null && item.Price != '')">
+            <!-- MRP: &#x20B9;{{item.MRP || item.Price | number}}</p> -->
+            MRP: &#x20B9;{{formatNumber(item)}}</p>
+        </div>
+      </div>
+    </div>
+
+    <ion-row style="margin-bottom: 5px;">
+
+      <ion-col size="4" style="text-align: center;color: #09509d;" (click)="downloadPdf(item)">
+        <ion-icon name="download-outline" class="icon-download"></ion-icon>
+        <span>Download</span>
+      </ion-col>
+      <ion-col size="5" style="text-align: center;color: #09509d;" (click)="clickOnFavourites(item)">
+        <ion-icon *ngIf="item.favouritesFlage == false" name="heart-outline" class="icon-heart-black"></ion-icon>
+        <ion-icon *ngIf="item.favouritesFlage == true" name="heart" class="icon-heart-red"></ion-icon>
+        <span>My Products</span>
+      </ion-col>
+      <ion-col size="3" style="text-align: center;color: #09509d;padding-top: 0px;" (click)="getPdfLink(item.ID,item)">
+        <img class="icon-share" src="assets/share.png">
+        <span>Share</span>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div *ngIf="emptyDataFlage">
+    <div style="font-size: 20px;text-align: center;margin-top: 50%">No product found</div>
+  </div>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more products...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  </div>
+</ion-content>
